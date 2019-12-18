@@ -24,10 +24,13 @@ class Entity:
     #-1 = left, down
     #1 = right, up
     def move(self, direction):
+        #unpack the directions
         x_dir = direction[0]
         y_dir = direction[1] * -1
+        #save the current positions
         self.prev_x_pos = self.x_pos
         self.prev_y_pos = self.y_pos
+        #move to new position
         self.x_pos += x_dir*self.speed
         self.y_pos += y_dir*self.speed
 
