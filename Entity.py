@@ -1,26 +1,23 @@
-class Entity:
+from MapObject import *
+
+
+class Entity(MapObject):
     def __init__(self, pos, size, speed, color, shape):
-
-        self.size = size
-
+        hitbox = (pos[0]-size/2, pos[1]-size/2, size, size)
+        MapObject.__init__(
+            self,
+            (pos[0], pos[1]),
+            size,
+            hitbox,
+            color,
+            Shapes.RECT
+        )
+        self.speed = speed
         #center
-        self.x_pos = pos[0]
-        self.y_pos = pos[1]
         self.prev_x_pos = pos[0]
         self.prev_y_pos = pos[1]
 
-        self.speed = speed
 
-        self.color = color
-        self.shape_func = shape
-
-    def draw_entity(self, screen):
-        self.shape_func(screen,
-                        self.color,
-                        (self.x_pos - self.size/2, self.y_pos - self.size/2, self.size, self.size))
-
-
-    #dir:
     #-1 = left, down
     #1 = right, up
     def move(self, direction):
@@ -33,8 +30,15 @@ class Entity:
         #move to new position
         self.x_pos += x_dir*self.speed
         self.y_pos += y_dir*self.speed
+        self.update_hitbox()
 
+    #1 = left
+    #2 = up
+    #3 = right
+    #4 = down
     def oob(self, direction):
+        #if(direction == 1):
         pass
+
     def hit_wall(self, direction):
         pass

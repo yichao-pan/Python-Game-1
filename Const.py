@@ -13,3 +13,4 @@ class Colors:
 
 class Shapes:
     RECT = pygame.draw.rect
+    CIRCLE = pygame.draw.circle
