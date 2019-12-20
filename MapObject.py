@@ -34,8 +34,8 @@ class MapObject:
 
     def update_hitbox(self):
         self.hitbox.center = (self.x_pos, self.y_pos)
-        print(f"obj pos: {self.x_pos} {self.y_pos}")
-        print(f"hit pos: {self.hitbox.center}")
+        # print(f"obj pos: {self.x_pos} {self.y_pos}")
+        # print(f"hit pos: {self.hitbox.center}")
 
     def draw_hitbox(self, screen):
         Shapes.RECT(

@@ -37,8 +37,11 @@ class Entity(MapObject):
     #3 = right
     #4 = down
     def oob(self, direction):
-        #if(direction == 1):
-        pass
+        if(direction == 1 or direction == 3):
+            self.x_pos = self.prev_x_pos
+        if (direction == 2 or direction == 4):
+            self.y_pos = self.prev_y_pos
+        self.update_hitbox()
 
     def hit_wall(self, direction):
         pass

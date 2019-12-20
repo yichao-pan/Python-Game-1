@@ -16,3 +16,6 @@ class Wall(MapObject):
 
     def __str__(self):
         return "Wall" + str(MapObject.x_pos) + " " + str(MapObject.y_pos)
+
+    def check_wall_col(self, obj):
+        return self.hitbox.colliderect(obj.hitbox)

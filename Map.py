@@ -77,30 +77,46 @@ class Map:
         # get the grid cords of the object
         grid_x = self.pix_to_grid(obj.x_pos)
         grid_y = self.pix_to_grid(obj.y_pos)
-        #print("Check:")
+        # print("Check:")
 
         # check the 9 boxes around the object
         # get the x and y cords for those boxes
         # make sure they dont go out of range near corners
         x_range = (
-            int(max(grid_x - 1, 0)),
-            int(min(grid_x + 2, self.grid_width))
+            int(max(grid_x - self.pix_to_grid(obj.size), 0)),
+            int(min(grid_x + 2 * self.pix_to_grid(obj.size), self.grid_width))
         )
         y_range = (
-            int(max(grid_y - 1, 0)),
-            int(min(grid_y + 2, self.grid_height))
+            int(max(grid_y - self.pix_to_grid(obj.size), 0)),
+            int(min(grid_y + 2 * self.pix_to_grid(obj.size), self.grid_height))
         )
-        #check each box for a wall
+        # check each box for a wall
         for i in range(y_range[0], y_range[1]):
             for j in range(x_range[0], x_range[1]):
-                #print(f"{j} {i}")
+                # print(f"{j} {i}")
                 wall = self.walls[i][j]
                 if (wall != None):
-                    #if there is a wall, check for overlap
-                    if (wall.hitbox.colliderect(obj.hitbox)):
-                        #if there is overlap, check if it is above, below, left or right
+                    # if there is a wall, check for overlap
+                    if (wall.check_wall_col(obj)):
+                        # if there is overlap, check if it is above, below, left or right
                         print("c")
+                        print(obj.x_pos)
+                        print(obj.y_pos)
+
+                        # horizontal collision
+                        # left
+                        if (j < grid_x):
+                            print("left")
+                        # right
+                        if (j > grid_x):
+                            print("right")
+                        # vertical
+                        # up
+                        if (i < grid_y):
+                            print("up")
+                        # down
+                        if (i > grid_y):
+                            print("down")
                         obj.x_pos = obj.prev_x_pos
                         obj.y_pos = obj.prev_y_pos
                         obj.update_hitbox()
-
